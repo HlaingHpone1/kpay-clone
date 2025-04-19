@@ -1,74 +1,399 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useState } from "react";
+import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 
 export default function HomeScreen() {
+  const [activeTab, setActiveTab] = useState("Popular");
+  const [isBalanceVisible, setIsBalanceVisible] = useState(true);
+
+  const totalBalance = 50000;
+  const currencyRateUSD = "1 USD = ";
+  const currencyRateMMK = "2094 MMK";
+
+  const toggleBalanceVisibility = () => {
+    setIsBalanceVisible(!isBalanceVisible);
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      {/* Total Balance and Transfer Section*/}
+      <View style={styles.topContainer}>
+        {/* Total Balance */}
+        <View style={{ marginBottom: 5 }}>
+          <Text style={styles.balanceText}>e-Wallet Balance (MMK) </Text>
+          <TouchableOpacity
+            style={styles.balanceContainer}
+            onPress={toggleBalanceVisibility}
+          >
+            {isBalanceVisible ? (
+              <Text style={styles.balance}>
+                {totalBalance.toLocaleString()}
+              </Text>
+            ) : (
+              <Text style={styles.balance}>******</Text>
+            )}
+            <Ionicons
+              name={isBalanceVisible ? "eye-off" : "eye"}
+              size={18}
+              color="#fff"
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+
+          <Text style={styles.balanceText}>
+            Total Balance (MMK):{" "}
+            {isBalanceVisible ? `${totalBalance.toLocaleString()}` : "******"}
+          </Text>
+        </View>
+
+        {/* Currency Rate */}
+        <View style={styles.currencyWrapper}>
+          <View style={styles.currencyRateContainer}>
+            <Image
+              source={{
+                uri: "https://plus.unsplash.com/premium_photo-1674591172747-2c1d461d7b68?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              }}
+              style={styles.flagIcon}
+            />
+            <Text style={styles.currencyRateText}>{currencyRateUSD}</Text>
+            <Image
+              source={{
+                uri: "https://pixabay.com/get/g8a141a9ebb054b909134b4cdf55e0aeb214761e45e71feb45069fb8f30275b1af84ceda568c5b8a9f0b2926858109beb67ef2e9cc54532c4317b379c7657be61_1280.jpg",
+              }}
+              style={styles.flagIcon}
+            />
+            <Text style={styles.currencyRateText}>{currencyRateMMK}</Text>
+          </View>
+        </View>
+
+        {/* Transfer */}
+        <View style={styles.transferContainer}>
+          <TouchableOpacity style={styles.transferItem}>
+            <Ionicons name="scan" size={24} color="#fff" />
+            <Text style={styles.transferText}>Scan</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.transferItem}>
+            <Ionicons name="swap-horizontal" size={24} color="#fff" />
+            <Text style={styles.transferText}>Transfer</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.transferItem}>
+            <Ionicons name="cash" size={24} color="#fff" />
+            <Text style={styles.transferText}>Cash In</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.transferItem}>
+            <Ionicons name="log-out" size={24} color="#fff" />
+            <Text style={styles.transferText}>Cash Out</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {/* Service Section */}
+      <View style={styles.bottomContainer}>
+        {/* Tabs */}
+        <View style={styles.tabContainer}>
+          <TouchableOpacity
+            style={[styles.tab, activeTab === "Popular" && styles.activeTab]}
+            onPress={() => setActiveTab("Popular")}
+          >
+            <Text
+              style={[
+                styles.tabText,
+                activeTab === "Popular" && styles.activeTabText,
+              ]}
+            >
+              Popular
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.tab,
+              activeTab === "My Services" && styles.activeTab,
+            ]}
+            onPress={() => setActiveTab("My Services")}
+          >
+            <Text
+              style={[
+                styles.tabText,
+                activeTab === "My Services" && styles.activeTabText,
+              ]}
+            >
+              My Services
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Tab Content */}
+        <View style={styles.serviceGrid}>
+          {activeTab === "Popular" ? (
+            <>
+              {/* Popular Tab Icons */}
+              <TouchableOpacity style={styles.serviceItem}>
+                <Ionicons
+                  name="phone-portrait-outline"
+                  size={30}
+                  color="#0054A6"
+                />
+                <Text style={styles.serviceText}>Top Up</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <Ionicons name="qr-code-outline" size={30} color="#0054A6" />
+                <Text style={styles.serviceText}>Receive</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <Ionicons name="card-outline" size={30} color="#0054A6" />
+                <Text style={styles.serviceText}>Bank A/C</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <Ionicons name="time-outline" size={30} color="#0054A6" />
+                <Text style={styles.serviceText}>History</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <MaterialCommunityIcons
+                  name="motion"
+                  size={30}
+                  color="#0054A6"
+                />
+                <Text style={styles.serviceText}>Quick Pay</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <Ionicons name="gift-outline" size={30} color="#0054A6" />
+                <Text style={styles.serviceText}>Gift Card</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <Ionicons name="receipt-outline" size={30} color="#0054A6" />
+                <Text style={styles.serviceText}>Bill Payment</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <Ionicons name="apps-outline" size={30} color="#0054A6" />
+                <Text style={styles.serviceText}>Mini Apps</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <Ionicons name="heart-outline" size={30} color="#0054A6" />
+                <Text style={styles.serviceText}>Donation</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <Ionicons name="medkit-outline" size={30} color="#0054A6" />
+                <Text style={styles.serviceText}>My Medicine</Text>
+              </TouchableOpacity>
+            </>
+          ) : (
+            <>
+              {/* My Services Tab Icons */}
+              <TouchableOpacity style={styles.serviceItem}>
+                <MaterialCommunityIcons
+                  name="storefront-outline"
+                  size={30}
+                  color="#0054A6"
+                />
+                <Text style={styles.serviceText}>My Market</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <MaterialCommunityIcons
+                  name="ticket-outline"
+                  size={30}
+                  color="#0054A6"
+                />
+                <Text style={styles.serviceText}>H20 Tickets</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <MaterialCommunityIcons
+                  name="food-outline"
+                  size={30}
+                  color="#0054A6"
+                />
+                <Text style={styles.serviceText}>Food & Drink</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <Ionicons
+                  name="phone-portrait-outline"
+                  size={30}
+                  color="#0054A6"
+                />
+                <Text style={styles.serviceText}>Top Up</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <Ionicons name="location-outline" size={30} color="#0054A6" />
+                <Text style={styles.serviceText}>Nearby</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <Ionicons name="airplane-outline" size={30} color="#0054A6" />
+                <Text style={styles.serviceText}>Travel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <MaterialCommunityIcons
+                  name="bed-outline"
+                  size={30}
+                  color="#0054A6"
+                />
+                <Text style={styles.serviceText}>Hotels</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <MaterialCommunityIcons name="taxi" size={30} color="#0054A6" />
+                <Text style={styles.serviceText}>Taxi</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <MaterialCommunityIcons
+                  name="shopping-outline"
+                  size={30}
+                  color="#0054A6"
+                />
+                <Text style={styles.serviceText}>Shops</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <MaterialCommunityIcons
+                  name="credit-card-outline"
+                  size={30}
+                  color="#0054A6"
+                />
+                <Text style={styles.serviceText}>Subscriptions</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <MaterialCommunityIcons
+                  name="bank-outline"
+                  size={30}
+                  color="#0054A6"
+                />
+                <Text style={styles.serviceText}>Loans</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.serviceItem}>
+                <MaterialCommunityIcons
+                  name="wallet-outline"
+                  size={30}
+                  color="#0054A6"
+                />
+                <Text style={styles.serviceText}>Pocket Money</Text>
+              </TouchableOpacity>
+            </>
+          )}
+        </View>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    backgroundColor: "#0054A6",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  topContainer: {
+    padding: 15,
+
+    height: "27%",
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  bottomContainer: {
+    padding: 15,
+
+    height: "73%",
+
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    backgroundColor: "#fff",
+
+    overflow: "hidden",
+  },
+  currencyWrapper: { display: "flex", alignItems: "center" },
+  currencyRateContainer: {
+    width: "43%",
+
+    marginTop: 8,
+    marginBottom: 10,
+    padding: 2,
+
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+
+    borderRadius: 5,
+
+    backgroundColor: "#f4f4f440",
+  },
+  balanceContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+
+    color: "#fff",
+    marginBottom: 5,
+  },
+  currencyRateText: {
+    color: "#fff",
+    fontSize: 11,
+  },
+  balance: {
+    textAlign: "center",
+    fontSize: 24,
+    fontWeight: "bold",
+
+    color: "#fff",
+  },
+  balanceText: {
+    textAlign: "center",
+
+    color: "#fff",
+    fontSize: 12,
+  },
+  icon: {
+    marginLeft: 10,
+  },
+  flagIcon: {
+    width: 12,
+    height: 12,
+    marginHorizontal: 5,
+    borderRadius: 50,
+  },
+  transferContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginTop: 10,
+  },
+  transferItem: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  transferText: {
+    marginTop: 5,
+    fontSize: 12,
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  tabContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginBottom: 15,
+  },
+  tab: {
+    paddingVertical: 5,
+    marginBottom: 10,
+
+    borderBottomWidth: 2,
+    borderBottomColor: "transparent",
+  },
+  activeTab: {
+    borderBottomColor: "#0054A6",
+  },
+  tabText: {
+    fontSize: 14,
+    color: "#aaa",
+  },
+  activeTabText: {
+    color: "#0054A6",
+    fontWeight: "bold",
+  },
+  serviceGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
+  },
+  serviceItem: {
+    width: "25%",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  serviceText: {
+    marginTop: 5,
+    fontSize: 12,
+    color: "#0054A6",
+    textAlign: "center",
   },
 });
