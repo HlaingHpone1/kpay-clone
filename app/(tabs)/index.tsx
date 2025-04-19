@@ -1,10 +1,12 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 
 export default function HomeScreen() {
   const [activeTab, setActiveTab] = useState("Popular");
   const [isBalanceVisible, setIsBalanceVisible] = useState(true);
+  const router = useRouter();
 
   const totalBalance = 50000;
   const currencyRateUSD = "1 USD = ";
@@ -68,19 +70,31 @@ export default function HomeScreen() {
 
         {/* Transfer */}
         <View style={styles.transferContainer}>
-          <TouchableOpacity style={styles.transferItem}>
+          <TouchableOpacity
+            style={styles.transferItem}
+            onPress={() => router.navigate("/scan")}
+          >
             <Ionicons name="scan" size={24} color="#fff" />
             <Text style={styles.transferText}>Scan</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.transferItem}>
+          <TouchableOpacity
+            style={styles.transferItem}
+            onPress={() => router.navigate("/transfer")}
+          >
             <Ionicons name="swap-horizontal" size={24} color="#fff" />
             <Text style={styles.transferText}>Transfer</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.transferItem}>
+          <TouchableOpacity
+            style={styles.transferItem}
+            onPress={() => router.navigate("/cashin")}
+          >
             <Ionicons name="cash" size={24} color="#fff" />
             <Text style={styles.transferText}>Cash In</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.transferItem}>
+          <TouchableOpacity
+            style={styles.transferItem}
+            onPress={() => router.navigate("/cashout")}
+          >
             <Ionicons name="log-out" size={24} color="#fff" />
             <Text style={styles.transferText}>Cash Out</Text>
           </TouchableOpacity>
@@ -127,7 +141,10 @@ export default function HomeScreen() {
           {activeTab === "Popular" ? (
             <>
               {/* Popular Tab Icons */}
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/topup")}
+              >
                 <Ionicons
                   name="phone-portrait-outline"
                   size={30}
@@ -135,19 +152,31 @@ export default function HomeScreen() {
                 />
                 <Text style={styles.serviceText}>Top Up</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/receive")}
+              >
                 <Ionicons name="qr-code-outline" size={30} color="#0054A6" />
                 <Text style={styles.serviceText}>Receive</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/bank")}
+              >
                 <Ionicons name="card-outline" size={30} color="#0054A6" />
                 <Text style={styles.serviceText}>Bank A/C</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/history")}
+              >
                 <Ionicons name="time-outline" size={30} color="#0054A6" />
                 <Text style={styles.serviceText}>History</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/quickpay")}
+              >
                 <MaterialCommunityIcons
                   name="motion"
                   size={30}
@@ -155,23 +184,38 @@ export default function HomeScreen() {
                 />
                 <Text style={styles.serviceText}>Quick Pay</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/giftcard")}
+              >
                 <Ionicons name="gift-outline" size={30} color="#0054A6" />
                 <Text style={styles.serviceText}>Gift Card</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/billpayment")}
+              >
                 <Ionicons name="receipt-outline" size={30} color="#0054A6" />
                 <Text style={styles.serviceText}>Bill Payment</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/miniapp")}
+              >
                 <Ionicons name="apps-outline" size={30} color="#0054A6" />
                 <Text style={styles.serviceText}>Mini Apps</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/donation")}
+              >
                 <Ionicons name="heart-outline" size={30} color="#0054A6" />
                 <Text style={styles.serviceText}>Donation</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/mymedicine")}
+              >
                 <Ionicons name="medkit-outline" size={30} color="#0054A6" />
                 <Text style={styles.serviceText}>My Medicine</Text>
               </TouchableOpacity>
@@ -179,7 +223,10 @@ export default function HomeScreen() {
           ) : (
             <>
               {/* My Services Tab Icons */}
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/mymarket")}
+              >
                 <MaterialCommunityIcons
                   name="storefront-outline"
                   size={30}
@@ -187,7 +234,10 @@ export default function HomeScreen() {
                 />
                 <Text style={styles.serviceText}>My Market</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/ticket")}
+              >
                 <MaterialCommunityIcons
                   name="ticket-outline"
                   size={30}
@@ -195,7 +245,10 @@ export default function HomeScreen() {
                 />
                 <Text style={styles.serviceText}>H20 Tickets</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/foodanddrink")}
+              >
                 <MaterialCommunityIcons
                   name="food-outline"
                   size={30}
@@ -203,7 +256,10 @@ export default function HomeScreen() {
                 />
                 <Text style={styles.serviceText}>Food & Drink</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/topup")}
+              >
                 <Ionicons
                   name="phone-portrait-outline"
                   size={30}
@@ -211,15 +267,24 @@ export default function HomeScreen() {
                 />
                 <Text style={styles.serviceText}>Top Up</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/nearby")}
+              >
                 <Ionicons name="location-outline" size={30} color="#0054A6" />
                 <Text style={styles.serviceText}>Nearby</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/travel")}
+              >
                 <Ionicons name="airplane-outline" size={30} color="#0054A6" />
                 <Text style={styles.serviceText}>Travel</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/hotel")}
+              >
                 <MaterialCommunityIcons
                   name="bed-outline"
                   size={30}
@@ -227,11 +292,17 @@ export default function HomeScreen() {
                 />
                 <Text style={styles.serviceText}>Hotels</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/taxi")}
+              >
                 <MaterialCommunityIcons name="taxi" size={30} color="#0054A6" />
                 <Text style={styles.serviceText}>Taxi</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/shop")}
+              >
                 <MaterialCommunityIcons
                   name="shopping-outline"
                   size={30}
@@ -239,7 +310,10 @@ export default function HomeScreen() {
                 />
                 <Text style={styles.serviceText}>Shops</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/subscription")}
+              >
                 <MaterialCommunityIcons
                   name="credit-card-outline"
                   size={30}
@@ -247,7 +321,10 @@ export default function HomeScreen() {
                 />
                 <Text style={styles.serviceText}>Subscriptions</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/loan")}
+              >
                 <MaterialCommunityIcons
                   name="bank-outline"
                   size={30}
@@ -255,7 +332,10 @@ export default function HomeScreen() {
                 />
                 <Text style={styles.serviceText}>Loans</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.serviceItem}>
+              <TouchableOpacity
+                style={styles.serviceItem}
+                onPress={() => router.navigate("/pocketmoney")}
+              >
                 <MaterialCommunityIcons
                   name="wallet-outline"
                   size={30}
@@ -278,12 +358,12 @@ const styles = StyleSheet.create({
   topContainer: {
     padding: 15,
 
-    height: "27%",
+    height: "28%",
   },
   bottomContainer: {
     padding: 15,
 
-    height: "73%",
+    height: "72%",
 
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
