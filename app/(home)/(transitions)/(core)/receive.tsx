@@ -62,7 +62,15 @@ const Receive = () => {
         <Text style={style.qrText}>Scan to pay me</Text>
 
         <View style={style.qrCode}>
-          <ViewShot ref={viewShotRef} options={{ format: "png", quality: 1 }}>
+          <ViewShot
+            ref={viewShotRef}
+            options={{ format: "png", quality: 1 }}
+            style={{
+              backgroundColor: Colors.white,
+              borderRadius: 7,
+              padding: 15,
+            }}
+          >
             <QRCode
               value="https://github.com/HlaingHpone1?tab=repositories"
               size={180}
@@ -84,8 +92,7 @@ const style = StyleSheet.create({
     height: "100%",
     backgroundColor: Colors.primary,
   },
-  qrCode: { flex: 1, marginTop: 25, alignItems: "center" },
-
+  qrCode: { flex: 1, alignItems: "center" },
   qrBox: {
     marginTop: 15,
     marginHorizontal: 15,

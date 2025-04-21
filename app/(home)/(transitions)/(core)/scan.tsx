@@ -14,6 +14,7 @@ import { StatusBar } from "expo-status-bar";
 
 const Scan = () => {
   const [facing, setFacing] = useState<CameraType>("back");
+  const [scanned, setScanned] = useState(false);
   const [permission, requestPermission] = useCameraPermissions();
 
   if (!permission) {
@@ -37,6 +38,18 @@ const Scan = () => {
     setFacing((current) => (current === "back" ? "front" : "back"));
   }
 
+  const handleBarCodeScanned = (scanningResult: BarcodeScanningResult) => {
+    if (scanned) return;
+
+    setScanned(true);
+    const { data, type } = scanningResult;
+
+    console.log("QR Code Scanned:", data);
+    alert(`Scanned QR Code:\n${data}`);
+
+    // Optionally, handle navigation or state update
+  };
+
   return (
     <View style={styles.container}>
       <Stack.Screen
@@ -53,7 +66,11 @@ const Scan = () => {
 
       <View style={styles.camerContainer}>
         <StatusBar />
-        <CameraView style={styles.camera} facing={facing}>
+        <CameraView
+          style={styles.camera}
+          facing={facing}
+          onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
+        >
           <View style={styles.overlay}>
             <View style={styles.frame}>
               <Text style={styles.instructionText}>
