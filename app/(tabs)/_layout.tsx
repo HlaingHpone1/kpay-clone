@@ -37,7 +37,7 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        // headerShown: false,
+        headerShown: false,
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
@@ -50,7 +50,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="(home)"
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => (
@@ -59,7 +59,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="life"
+        name="(life)"
         options={{
           title: "Life",
           tabBarIcon: ({ color }) => (
@@ -68,7 +68,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="qr"
+        name="(qr)"
         options={{
           title: "QR",
           tabBarIcon: ({ color }) => (
@@ -78,7 +78,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="message"
+        name="(message)"
         options={{
           title: "Messages",
           tabBarIcon: ({ color }) => (
@@ -87,7 +87,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="(profile)"
         options={{
           title: "Profile",
           tabBarIcon: ({ color }) => (

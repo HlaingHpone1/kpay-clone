@@ -1,6 +1,6 @@
 import { Colors } from "@/constants/Colors";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 
@@ -19,6 +19,11 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+      <Stack.Screen
+        options={{
+          title: "Home",
+        }}
+      />
       {/* Total Balance and Transfer Section*/}
       <View style={styles.topContainer}>
         {/* Total Balance */}

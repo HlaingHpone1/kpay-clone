@@ -36,9 +36,20 @@ const Transfer = () => {
         }}
       />
 
-      <View style={{ backgroundColor: Colors.primary, padding: 16 }}>
-        {/* Header */}
-        <View style={styles.header}>
+      <View style={{ position: "relative" }}>
+        <View
+          style={{
+            backgroundColor: Colors.primary,
+            height: 100,
+            width: "100%",
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+        />
+       <View style={styles.transferBox}>
+         {/* Header */}
+         <View style={styles.header}>
           <Text style={styles.headerText}>Transfer to Phone Number</Text>
           <Ionicons
             name="information-circle-outline"
@@ -63,6 +74,7 @@ const Transfer = () => {
         <TouchableOpacity style={styles.nextButton}>
           <Text style={styles.nextButtonText}>Next</Text>
         </TouchableOpacity>
+       </View>
       </View>
 
       {/* Recent Transfers */}
@@ -93,6 +105,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5F5F5",
     // padding: 16,
   },
+  transferBox: {
+    padding: 16,
+    backgroundColor: "#fff",
+  },
   header: {
     flexDirection: "row",
     alignItems: "center",
@@ -101,7 +117,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#000",
+    color: "#fff",
     marginRight: 8,
   },
   inputContainer: {
